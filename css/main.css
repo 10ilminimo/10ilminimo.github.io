@@ -1,0 +1,20 @@
+.bg-purple{
+  background-color: #5b21b6;
+}
+
+.text-purple{
+  color: #5b21b6;
+}
+
+
+.bg-red{
+  background-color: #eb0056;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+
+}
+
+body,html{
+  overflow-x: hidden;
+  font-family: "Montserrat" !important;
+}
