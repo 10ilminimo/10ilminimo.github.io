@@ -35,7 +35,7 @@
     </div>
     <div class="row mt-4">
       <div class="col-auto mx-auto text-center">
-        <span class="bg-red text-light px-3 py-1 fw-bold text-uppercase">Firma per un salario minimo di 10€ l'ora</span>
+        <span class="slogan bg-red text-light fw-bold text-uppercase">Firma per un salario minimo di 10€ l'ora</span>
       </div>
     </div>
     <div class="row mt-3 mb-4">
@@ -63,7 +63,7 @@
     </div>
   </div>
 
-  <div class="container mt-3" x-transition>
+  <div class="container-xl mt-3" x-transition>
     <div x-data="listabanchetti()">
       <template x-if="(filterRegion != 'Tutte le regioni') && (filterRegion != '') && ! (filterRegion in banchetti)">
         <div class="row">
@@ -93,12 +93,12 @@
                   <template x-for="banchetto in banchetti_prov">
                     <li class="list-group-item">
                       <div class="row">
-                        <div class="col col-4 col-md-3 col-lg-1 fs-5 fw-bold text-purple my-1" x-text="banchetto.Giorno">
+                        <div class="col col-4 col-md-3 col-lg-2 col-xl-1 fs-5 fw-bold text-purple my-1" x-text="banchetto.Giorno">
                         </div>
                         <div class="col col-8 col-md-4 col-lg-2 fs-5 fw-bold my-1" x-text="banchetto.Comune">
                         </div>
-                        <div class="col col-12 col-md-5 col-lg-3 my-1" x-text="'dalle ' + banchetto.inizio + ' alle ' + banchetto.fine"></div>
-                        <div class="col col-12 col-lg-6 my-1 fst-italic" x-text="banchetto.Indirizzo"></div>
+                        <div class="col col-12 col-md-5 col-lg-2 my-1" x-text="banchetto.inizio + ' - ' + banchetto.fine"></div>
+                        <div class="col col-12 col-lg-6 col-xl-7 my-1 fst-italic" x-text="banchetto.Indirizzo"></div>
                         <div class="col col-12 fs-6 text-end" x-text="'Info: ' + banchetto.Contatto"></div>
                       </div>
                     </li>
