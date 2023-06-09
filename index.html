@@ -1,115 +1,23 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-    <link rel="shortcut icon" type="image/x-icon" href="img/prclogo.png">
-    <title>Banchetti</title>
+---
+layout: default
+title: Home
+permalink: /
+---
+<div class="container">
+  {% for p in site.data.home.intro %}
+  <p>{{p}}</p>
+  {% endfor %}
 
-    <!-- Standard html meta tags -->
-
-    <meta name="description" content="Banchetti raccolta firme Legge di Iniziativa Popolare 10èilminimp" />
-    <meta name="keywords" content="10èilminimo LIP legge raccolta firme unione popolare rifondazione potere al popolo" />
-    <meta property="og:image" content="img/10èilminimo">
-    <meta name="title" content="Banchetti 10èilminimo">
-
-    <link href="css/main.css" type="text/css" rel="stylesheet" media="screen" />
-    <script defer src="js/main.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js" integrity="sha512-dfX5uYVXzyU8+KHqj8bjo7UkOdg18PaOtpa48djpNbZHwExddghZ+ZmzWT06R5v6NSk3ZUfsH6FNEDepLx9hPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;800;900&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-
-  </head>
-
-
-<body class="bg-light">
-  <header class="bg-purple shadow-lg p-1 mb-5">
-    <div class="row mt-4">
-      <div class="col-auto mx-auto">
-        <img src="img/logo.png" style="max-height: 10vh">
-      </div>
-    </div>
-    <div class="row mt-4">
-      <div class="col-auto mx-auto text-center">
-        <span class="slogan bg-red text-light fw-bold text-uppercase">Firma per un salario minimo di 10€ l'ora</span>
-      </div>
-    </div>
-    <div class="row mt-3 mb-4">
-      <div class="col-auto mx-auto">
-        <h1 class="text-center text-light fw-bold"> Banchetti di raccolta firme</h1>
-      </div>
-    </div>
-  </header>
-  <div x-data="{filterRegion: ''}">
-  <div class="container">
-    <div class="row">
-      <div class="col col-auto mx-auto">
-        <div class="card shadow">
-          <div class="card-body mx-2 my-2">
-            <h3 class="text-purple text-center fw-bold">Scegli la regione</h3>
-            <select x-data="regioni()" class="form-select form-select-lg mb-3 mt-3" x-model="filterRegion" x-change="console.log('culo')" aria-label=".form-select-lg example">
-              <template x-for="regione in regioni">
-                <option x-text="regione"></option>
-              </template>
-            </select>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="container-xl mt-3" x-transition>
-    <div x-data="listabanchetti()">
-      <template x-if="(filterRegion != 'Tutte le regioni') && (filterRegion != '') && ! (filterRegion in banchetti)">
-        <div class="row">
-          <div class="col-auto mx-auto my-4">
-            <div class="card">
-              <div class="card-body text-center shadow">
-                Non ci sono banchetti per la regione <span x-text="filterRegion"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </template>
-      <template x-for="(banchetti_reg, regione) in banchetti" :key="regione">
-        <div class="card my-5 shadow" x-show="loaded && (filterRegion === '' || filterRegion === 'Tutte le regioni' || filterRegion === regione)" x-transition>
-          <div class="card-header">
-            <h2 class="text-purple fw-bold mt-2 text-center" x-text="regione"> </h2>
-          </div>
-          <div class="card-body">
-            <div class="accordion">
-
-
-            <template x-for="(banchetti_prov, provincia) in banchetti_reg ">
-              <div>
-                <h4 x-text="provincia" class="fw-bold text-center mt-2 mb-3"></h4>
-                <ul class="list-group">
-                  <template x-for="banchetto in banchetti_prov">
-                    <li class="list-group-item">
-                      <div class="row">
-                        <div class="col col-4 col-md-3 col-lg-2 col-xl-1 fs-5 fw-bold text-purple my-1" x-text="banchetto.Giorno">
-                        </div>
-                        <div class="col col-8 col-md-4 col-lg-2 fs-5 fw-bold my-1" x-text="banchetto.Comune">
-                        </div>
-                        <div class="col col-12 col-md-5 col-lg-2 my-1" x-text="banchetto.inizio + ' - ' + banchetto.fine"></div>
-                        <div class="col col-12 col-lg-6 col-xl-7 my-1 fst-italic" x-text="banchetto.Indirizzo"></div>
-                        <div class="col col-12 fs-6 text-end" x-text="'Info: ' + banchetto.Contatto"></div>
-                      </div>
-                    </li>
-                  </template>
-                </ul>
-              </div>
-          </template>
-        </template>
+  <div class="row row-cols-1 justify-content-center row-cols-lg-4 mb-5 mt-5">
+    {% for b in site.data.home.buttons %}
+    <div class="col-auto">
+      <a href="{{b.link}}" class="card reveal-card h-100 d-flex flex-column justify-content-center">
+        <h5 class="fw-bold text-center fs-4 my-0" >{{b.title}}</h5>
+        <div class="icon-bottom"><span><i class="bi bi-{{b.icon}}"></i></span></div>
+    </a>
     </div>
 
+    {% endfor %}
   </div>
 </div>
-</body>
-</html>
+
