@@ -54,7 +54,7 @@ permalink: /banchetti
 
             <template x-for="(banchetti_prov, provincia) in banchetti_reg ">
               <div>
-                <h4 x-text="provincia" class="fw-bold text-center mt-2 mb-3"></h4>
+                <h4 x-text="'Provincia di ' + provincia" class="fw-bold text-center mt-2 mb-3"></h4>
                 <ul class="list-group mb-5">
                   <template x-for="banchetto in banchetti_prov">
                     <li class="list-group-item">
@@ -64,7 +64,7 @@ permalink: /banchetti
                         <div class="col col-8 col-md-4 col-lg-2 fs-5 fw-bold my-1" x-text="banchetto.Comune">
                         </div>
                         <div class="col col-12 col-md-5 col-lg-2 my-1" x-text="banchetto.inizio + ' - ' + banchetto.fine"></div>
-                        <div class="col col-12 col-lg-6 col-xl-7 my-1 fst-italic" x-text="banchetto.Indirizzo"></div>
+                        <div class="col col-12 col-lg-6 col-xl-7 my-1 fst-italic" x-text="(banchetto.Presso == '' || banchetto.Indirizzo == '') ? [banchetto.Presso, banchetto.Indirizzo].join('') : [banchetto.Presso, banchetto.Indirizzo].join(' - ')"></div>
                         <div x-show="banchetto.Contatto != ''" class="col col-12 fs-6 text-end" x-text="'Info: ' + banchetto.Contatto"></div>
                       </div>
                     </li>
